@@ -1,0 +1,149 @@
+<head>
+    <title>BULMA TODO LIST</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="block">
+                        <h3 class="subtitle"
+                            style="color: hsl(153, 53%, 53%); border-bottom: 2px solid hsl(153, 53%, 53%); text-transform: uppercase;">
+                            Add Item</h3>
+                        <div class="block" style="padding-top: 2%;">
+                            <div class="field has-addons">
+                                <div class="control has-icons-left has-icons-right is-expanded">
+                                    <input id="newTaskName" type="text" class="input is-success is-medium"
+                                        placeholder="Enter words to search">
+                                    <span class="icon is-medium is-left">
+                                        <i class="fa fa-pencil"></i>
+                                    </span>
+                                </div>
+                                <p class="control">
+                                    <a class="button is-success is-medium" onclick="addTask()">ADD</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtitle"
+                        style="color: hsl(207, 61%,  53%); border-bottom: 2px solid hsl(207, 61%,  53%); text-transform: uppercase;">
+                        Todo</h3>
+
+                    <div class="content">
+                        <ul id="incomplete-tasks" style="list-style-type:none;">
+                            <li id="mi first taskli" > 
+                                <article class="message is-info">
+                                    <div class="message-body">
+                                        <div class="field has-addons ">
+                                            <p class="control">
+                                                <a class="button is-success" onclick="addCompletedTask('mi first task')">
+                                                    Complete
+                                                </a>
+                                            </p>
+                                            <p class="control is-expanded">
+                                                <input class="input" type="text" placeholder="mi first task" readonly>
+                                            </p>
+                                            <p class="control">
+                                                <a class="button is-warning" onclick="removetask('mi first taskli')">
+                                                Remove
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subtitle"
+                        style="color: hsl(348, 86%, 61%); border-bottom: 2px solid hsl(348, 86%, 61%); text-transform: uppercase;">
+                        Completed</h3>
+                    <div class="content">
+                        <ul id="complete-tasks" style="list-style-type:none;">
+                            <li id="mi first tasklicomplet2" > 
+                                <article class="message is-danger">
+                                    <div class="message-body">
+                                        <div class="field has-addons ">
+                                            <p class="control">
+                                                <a class="button is-danger" onclick="removetask('mi first tasklicomplet2')">
+                                                    Completed
+                                                </a>
+                                            </p>
+                                            <p class="control is-expanded">
+                                                <input class="input" type="text" placeholder="mi first task" readonly>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let incompleteTasks = document.getElementById("incomplete-tasks");
+        let completeTasks = document.getElementById("complete-tasks");
+        let newtasknameinput = document.getElementById("newTaskName");
+        function addTask() {
+            let newtaskobject = `
+                <li id="${newtasknameinput.value}li" > 
+                    <article class="message is-info">
+                        <div class="message-body">
+                            <div class="field has-addons ">
+                                <p class="control">
+                                    <a class="button is-success" onclick="addCompletedTask('${newtasknameinput.value}')">
+                                        Complete
+                                    </a>
+                                </p>
+                                <p class="control is-expanded">
+                                    <input class="input" type="text" placeholder="${newtasknameinput.value}" readonly>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-warning" onclick="removetask('${newtasknameinput.value}li')">
+                                    Remove
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </li>`;
+            console.log(newtaskobject);
+            incompleteTasks.innerHTML += newtaskobject;
+        }
+
+        function addCompletedTask(testoftask) {
+            removetask(testoftask + "li")
+            let newtaskobject = `
+                    <li id="${testoftask}licomplet" > 
+                        <article class="message is-danger">
+                            <div class="message-body">
+                                <div class="field has-addons ">
+                                    <p class="control">
+                                        <a class="button is-danger" onclick="removetask('${testoftask}licomplet')">
+                                            Completed
+                                        </a>
+                                    </p>
+                                    <p class="control is-expanded">
+                                        <input class="input" type="text" placeholder="${testoftask}" readonly>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </li>`;
+            console.log(newtaskobject);
+            completeTasks.innerHTML += newtaskobject;
+        }
+
+        function removetask(id) {
+            console.log(id);
+            document.getElementById(id).innerHTML = '';
+        }
+    </script>
+</body>
